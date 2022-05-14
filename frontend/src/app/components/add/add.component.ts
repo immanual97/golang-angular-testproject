@@ -13,7 +13,7 @@ export class AddComponent implements OnInit {
  
   name=""
   email=""
-  income=1
+  income=0
   ipaddress=""
   date=""
 
@@ -25,7 +25,7 @@ export class AddComponent implements OnInit {
     var values={
       id:this.id,
       name:this.name,
-      date:this.email,
+      date:this.date,
       email:this.email,
       income:this.income,
       ipaddress:this.ipaddress

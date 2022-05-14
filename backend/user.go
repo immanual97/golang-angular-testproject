@@ -11,12 +11,12 @@ import (
 )
 
 type UserDetails struct {
-	ID        int    `json:"id"`
-	Name      string `json:"name"`
-	Date      string `json:"date"`
-	Email     string `json:"email"`
-	Income    int    `json:"income"`
-	IpAddress string `json:"ipaddress"`
+	ID        int     `json:"id"`
+	Name      string  `json:"name"`
+	Date      string  `json:"date"`
+	Email     string  `json:"email"`
+	Income    float32 `json:"income"`
+	IpAddress string  `json:"ipaddress"`
 }
 
 var data []UserDetails
@@ -35,9 +35,9 @@ func postUser(c *gin.Context) {
 		panic(err1)
 	}
 
-	json.Unmarshal(jsonfile, &data)
+	json.Unmarshal(jsonfile, &data) //json to go_array
 
-	data = append(data, user)
+	data = append(data, user) //append
 
 	newUser, err := json.MarshalIndent(data, "", "\t")
 	if err != nil {
@@ -49,10 +49,6 @@ func postUser(c *gin.Context) {
 }
 
 func getUser(c *gin.Context) {
-
-	//Header().Set("Access-Control-Allow-Origin", "*")
-
-	//c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 
 	jsonfile, err1 := ioutil.ReadFile("customer.json")
 	if err1 != nil {
@@ -102,7 +98,7 @@ func deleteUser(c *gin.Context) {
 func main() {
 	router := gin.Default()
 
-	config := cors.DefaultConfig()
+	config := cors.DefaultConfig() // for handling cors
 	config.AllowAllOrigins = true
 	router.Use(cors.New(config))
 
